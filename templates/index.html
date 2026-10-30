@@ -1,0 +1,177 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="hero-left">
+
+        <h1>
+            Smart Personal <br>
+            Finance &
+            Expense Manager
+        </h1>
+
+        <p>
+            Track your income, expenses, budgets and savings
+            with one powerful dashboard designed for students,
+            professionals and families.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#" class="btn-primary">Get Started</a>
+            <a href="#" class="btn-secondary">Learn More</a>
+        </div>
+
+    </div>
+
+    <div class="hero-right">
+
+        <div class="dashboard-card">
+
+            <div class="card-header">
+                Dashboard
+            </div>
+
+            <div class="card-row">
+                <span>Income</span>
+                <strong>₹25,000</strong>
+            </div>
+
+            <div class="card-row">
+                <span>Expenses</span>
+                <strong>₹12,500</strong>
+            </div>
+
+            <div class="card-row">
+                <span>Savings</span>
+                <strong>₹12,500</strong>
+            </div>
+
+            <div class="chart-box">
+                📈 Monthly Growth
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Statistics Section -->
+
+<section class="stats">
+
+    <div class="stat-card">
+        <div class="stat-icon">💰</div>
+        <h2>₹25,000</h2>
+        <p>Total Income</p>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon">💸</div>
+        <h2>₹12,500</h2>
+        <p>Total Expenses</p>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon">💎</div>
+        <h2>₹12,500</h2>
+        <p>Total Savings</p>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon">📊</div>
+        <h2>250</h2>
+        <p>Transactions</p>
+    </div>
+
+</section>
+
+<!-- Analytics Section -->
+
+<section class="analytics">
+
+    <div class="section-title">
+        <h2>Financial Analytics</h2>
+        <p>Visualize your monthly income and expenses with interactive charts.</p>
+    </div>
+
+    <div class="analytics-grid">
+
+        <div class="chart-card">
+            <canvas id="incomeChart"></canvas>
+        </div>
+
+        <div class="small-card">
+            <h3>Budget Progress</h3>
+
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+
+            <p>75% of Monthly Budget Used</p>
+
+        </div>
+
+        <div class="small-card">
+
+            <h3>Expense Categories</h3>
+
+            <ul>
+                <li>🍔 Food - 40%</li>
+                <li>🚗 Travel - 20%</li>
+                <li>🛒 Shopping - 25%</li>
+                <li>📚 Education - 15%</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="features">
+
+    <div class="section-title">
+        <h2>Why Choose ByteBank?</h2>
+        <p>Everything you need to manage your finances efficiently.</p>
+    </div>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+            <h3>💰 Income Tracking</h3>
+            <p>Record and manage all your income sources easily.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>💸 Expense Management</h3>
+            <p>Track every expense and stay within your budget.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>📊 Reports</h3>
+            <p>View monthly reports and financial insights.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>🎯 Budget Planning</h3>
+            <p>Create budgets and monitor your savings goals.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>🔒 Secure Accounts</h3>
+            <p>Your personal finance data is stored securely.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>🌙 Light & Dark Mode</h3>
+            <p>Switch between beautiful themes for comfortable use.</p>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

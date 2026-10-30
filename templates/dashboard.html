@@ -1,0 +1,374 @@
+{% extends "layout.html" %}
+
+{% block title %}Dashboard | ByteBank{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h2 class="mb-4">
+        Welcome, {{ current_user.username }} 👋
+    </h2>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="card shadow p-4 text-center">
+                <h5>Total Balance</h5>
+                <h2 class="text-success">
+                   ₹{{ total_balance }}
+                </h2>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow p-4 text-center">
+                <h5>Total Income</h5>
+                <h2 class="text-primary">
+                   ₹{{ total_income }}
+                </h2>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow p-4 text-center">
+                <h5>Total Expenses</h5>
+                <h2 class="text-danger">
+                   ₹{{ total_expense }}
+                </h2>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Monthly Budget Card -->
+
+<div class="card shadow border-0 mt-5">
+
+    <div class="card-body p-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+
+        <h4 class="mb-1">
+            🎯 Monthly Budget
+        </h4>
+
+        <p class="text-muted mb-0">
+            View and track your budget for any month.
+        </p>
+
+    </div>
+
+    <a href="{{ url_for('budget') }}"
+       class="btn btn-primary">
+        ⚙️ Manage Budget
+    </a>
+
+</div>
+
+
+<!-- Month Selector -->
+
+<form method="GET"
+      action="{{ url_for('dashboard') }}"
+      class="row g-3 align-items-end mb-4">
+
+    <div class="col-md-6">
+
+        <label class="form-label fw-bold">
+            📅 Select Month
+        </label>
+
+        <input
+            type="month"
+            name="month"
+            class="form-control"
+            value="{{ selected_year }}-{{ '%02d'|format(selected_month_number) }}"
+            required
+        >
+
+    </div>
+
+    <div class="col-md-3">
+
+        <button
+            type="submit"
+            class="btn btn-dark w-100">
+            🔍 View Budget
+        </button>
+
+    </div>
+
+</form>
+
+
+        {% if budget_amount > 0 %}
+
+            <div class="row mt-4">
+
+                <div class="col-md-4">
+
+                    <p class="text-muted mb-1">
+                        Monthly Budget
+                    </p>
+
+                    <h4>
+                        ₹{{ "%.2f"|format(budget_amount) }}
+                    </h4>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <p class="text-muted mb-1">
+                        Spent
+                    </p>
+
+                    <h4 class="text-danger">
+                        ₹{{ "%.2f"|format(budget_spent) }}
+                    </h4>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <p class="text-muted mb-1">
+                        Remaining
+                    </p>
+
+                    {% if budget_remaining >= 0 %}
+
+                        <h4 class="text-success">
+                            ₹{{ "%.2f"|format(budget_remaining) }}
+                        </h4>
+
+                    {% else %}
+
+                        <h4 class="text-danger">
+                            -₹{{ "%.2f"|format(budget_remaining|abs) }}
+                        </h4>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- Budget Progress -->
+
+<div class="mt-4">
+
+    <div class="d-flex justify-content-between mb-2">
+
+        <span class="fw-bold">
+            Budget Usage
+        </span>
+
+        <span class="fw-bold">
+            {{ "%.1f"|format(budget_percentage) }}%
+        </span>
+
+    </div>
+
+    <div class="progress" style="height: 15px;">
+
+        {% if budget_percentage <= 0 %}
+
+            <div class="progress-bar"
+                 style="width: 0%;">
+            </div>
+
+        {% elif budget_percentage < 25 %}
+
+            <div class="progress-bar"
+                 style="width: 25%;">
+            </div>
+
+        {% elif budget_percentage < 50 %}
+
+            <div class="progress-bar"
+                 style="width: 50%;">
+            </div>
+
+        {% elif budget_percentage < 75 %}
+
+            <div class="progress-bar"
+                 style="width: 75%;">
+            </div>
+
+        {% else %}
+
+            <div class="progress-bar"
+                 style="width: 100%;">
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+            <!-- Budget Status -->
+
+            <div class="mt-4">
+
+                {% if budget_percentage < 75 %}
+
+                    <div class="alert alert-success mb-0">
+                        🟢 You are doing well! Your spending is within your budget.
+                    </div>
+
+                {% elif budget_percentage < 100 %}
+
+                    <div class="alert alert-warning mb-0">
+                        🟡 Be careful! You are getting close to your budget limit.
+                    </div>
+
+                {% else %}
+
+                    <div class="alert alert-danger mb-0">
+                        🔴 You have exceeded your monthly budget.
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+        {% else %}
+
+            <div class="text-center py-4">
+
+                <div style="font-size: 45px;">
+                    🎯
+                </div>
+
+                <h5 class="mt-3">
+                    No budget set for this month
+                </h5>
+
+                <p class="text-muted">
+                    Set a monthly budget to start tracking your spending.
+                </p>
+
+                <a href="{{ url_for('budget') }}"
+                   class="btn btn-primary">
+                    🎯 Set Monthly Budget
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+    <div class="mt-5">
+
+    <a href="/add-income" class="btn btn-success me-2">
+        ➕ Add Income
+    </a>
+
+    <a href="/income-history" class="btn btn-primary me-2">
+        💰 Income History
+    </a>
+
+    <a href="/add-expense" class="btn btn-danger me-2">
+        ➖ Add Expense
+    </a>
+
+    <a href="/expense-history" class="btn btn-warning">
+        💸 Expense History
+    </a>
+
+    <a href="/transactions" class="btn btn-dark ms-2">
+        📋 All Transactions
+    </a>
+
+        </div>
+
+    <hr class="my-5">
+
+    <!-- Analytics Section -->
+
+    <h3 class="mb-4">📊 Financial Analytics</h3>
+
+    <div class="card shadow-sm p-4 mb-5">
+
+        <h5 class="text-center mb-4">
+            Income vs Expenses
+        </h5>
+
+        <canvas id="financeChart"></canvas>
+
+    </div>
+
+    <h3>Recent Transactions</h3>
+
+<div class="card shadow-sm mt-3">
+
+    <div class="card-body">
+
+        {% if recent_transactions %}
+
+            {% for transaction in recent_transactions %}
+
+                <div class="d-flex justify-content-between border-bottom py-2">
+
+                    <div>
+
+                        {% if transaction.type == "Income" %}
+                            💰 {{ transaction.title }}
+                        {% else %}
+                            💸 {{ transaction.title }}
+                        {% endif %}
+
+                    </div>
+
+                    <div>
+
+                        {% if transaction.type == "Income" %}
+
+                            <span class="text-success">
+                                +₹{{ transaction.amount }}
+                            </span>
+
+                        {% else %}
+
+                            <span class="text-danger">
+                                -₹{{ transaction.amount }}
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>No transactions available.</p>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</div>
+
+<script>
+    const monthlyIncome = {{ monthly_income | tojson }};
+    const monthlyExpense = {{ monthly_expense | tojson }};
+</script>
+
+{% endblock %}

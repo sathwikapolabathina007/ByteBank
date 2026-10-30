@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+
+{% block title %}Edit Income | ByteBank{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+
+            <div class="card shadow p-4">
+
+                <h2 class="text-center mb-4">
+                    ✏️ Edit Income
+                </h2>
+
+                <form method="POST">
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Income Source
+                        </label>
+
+                        <input
+                            type="text"
+                            name="source"
+                            class="form-control"
+                            value="{{ income.source }}"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Amount
+                        </label>
+
+                        <input
+                            type="number"
+                            name="amount"
+                            class="form-control"
+                            value="{{ income.amount }}"
+                            step="0.01"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Date
+                        </label>
+
+                        <input
+                            type="date"
+                            name="date"
+                            class="form-control"
+                            value="{{ income.date }}"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="d-flex gap-2">
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary w-100">
+                            Update Income
+                        </button>
+
+                        <a
+                            href="{{ url_for('transactions') }}"
+                            class="btn btn-secondary w-100">
+                            Cancel
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

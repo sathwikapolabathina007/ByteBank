@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}Income History{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h2 class="mb-4">Income History</h2>
+
+    {% if incomes %}
+
+    <table class="table table-striped table-hover">
+
+        <thead class="table-dark">
+            <tr>
+                <th>Source</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for income in incomes %}
+
+            <tr>
+                <td>{{ income.source }}</td>
+                <td>₹{{ income.amount }}</td>
+                <td>{{ income.date }}</td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    {% else %}
+
+    <div class="alert alert-info">
+        No income records found.
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

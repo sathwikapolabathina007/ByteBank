@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block title %}Add Expense{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h2>Add Expense</h2>
+
+    <form method="POST">
+
+        <div class="mb-3">
+            <label>Expense Category</label>
+
+            <select name="category" class="form-control" required>
+
+                <option value="">Select Category</option>
+
+                <option>Food</option>
+                <option>Travel</option>
+                <option>Shopping</option>
+                <option>Education</option>
+                <option>Bills</option>
+                <option>Health</option>
+                <option>Entertainment</option>
+                <option>Others</option>
+
+            </select>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label>Amount</label>
+
+            <input
+                type="number"
+                name="amount"
+                class="form-control"
+                required>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label>Date</label>
+
+            <input
+                type="date"
+                name="date"
+                class="form-control"
+                required>
+
+        </div>
+
+        <button class="btn btn-danger">
+            Save Expense
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}
